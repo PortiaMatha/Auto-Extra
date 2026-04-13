@@ -1,0 +1,302 @@
+.product-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Breadcrumbs */
+
+.product-breadcrumbs {
+  font-size: 0.85rem;
+  color: #777;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.product-breadcrumbs a {
+  color: #555;
+  text-decoration: none;
+}
+
+.product-breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+/* Main layout */
+
+.product-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr);
+  gap: 2rem;
+}
+
+/* Gallery */
+
+.product-gallery__main {
+  border-radius: 10px;
+  border: 1px solid #eee;
+  background: #fafafa;
+  padding: 0.7rem;
+}
+
+.product-gallery__main img {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+}
+
+.product-gallery__thumbs {
+  margin-top: 0.7rem;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.product-thumb {
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.product-thumb img {
+  display: block;
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.product-thumb--active {
+  border-color: #ffcc00;
+}
+
+/* Info */
+
+.product-info__title {
+  margin: 0 0 0.2rem;
+  font-size: 1.6rem;
+}
+
+.product-info__brand {
+  margin: 0 0 0.8rem;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* Rating */
+
+.product-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.7rem;
+}
+
+.product-rating__stars {
+  color: #ffcc00;
+  font-size: 1.1rem;
+}
+
+.product-rating__text {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+/* Price */
+
+.product-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin-bottom: 0.9rem;
+}
+
+.product-price__label {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.product-price__value {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+/* Options */
+
+.product-field {
+  margin-bottom: 0.9rem;
+}
+
+.product-field__label {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #777;
+  margin-bottom: 0.3rem;
+}
+
+.product-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.product-option {
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  padding: 0.25rem 0.8rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  background: #fff;
+}
+
+.product-option--active {
+  border-color: #ffcc00;
+  background: #fffae0;
+}
+
+/* Purchase section */
+
+.product-purchase {
+  display: flex;
+  gap: 1.5rem;
+  margin: 1rem 0;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.product-quantity {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.product-quantity__control {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  overflow: hidden;
+}
+
+.product-quantity__control button {
+  border: none;
+  background: #f4f4f4;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.product-quantity__control span {
+  width: 32px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.product-shipping__line {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Actions */
+
+.product-actions {
+  display: flex;
+  gap: 0.7rem;
+  margin-bottom: 1.2rem;
+}
+
+/* Short description */
+
+.product-short-desc h2 {
+  margin: 0 0 0.3rem;
+  font-size: 1rem;
+}
+
+.product-short-desc p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Reviews */
+
+.product-reviews {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.product-reviews__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  margin-bottom: 0.6rem;
+}
+
+.product-review-form {
+  border-radius: 8px;
+  border: 1px solid #eee;
+  padding: 0.8rem;
+  background: #fafafa;
+}
+
+.product-review-form__row {
+  margin-bottom: 0.6rem;
+  font-size: 0.9rem;
+}
+
+.product-review-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.product-review-form select,
+.product-review-form textarea {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+/* Custom build section */
+
+.product-custom {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #eee;
+}
+
+.product-custom h2 {
+  margin: 0 0 0.4rem;
+  font-size: 1rem;
+}
+
+.product-custom p {
+  margin: 0 0 0.7rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.product-custom__toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+}
+
+.product-custom__note {
+  margin-top: 0.5rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: 6px;
+  background: #fffae0;
+  font-size: 0.85rem;
+}
+
+/* Reuse existing btn styles from earlier: 
+   .btn, .btn--primary, .btn--ghost, .btn--small */

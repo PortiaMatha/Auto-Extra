@@ -1,0 +1,23 @@
+.car-selector {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.car-selector__field {
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  font-size: 0.9rem;
+}
+
+.car-selector__field label {
+  margin-bottom: 0.25rem;
+  color: #555;
+}
+
+.car-selector__field select {
+  padding: 0.4rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}

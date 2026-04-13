@@ -1,0 +1,160 @@
+.header {
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 14px;
+}
+
+/* TOP BAR */
+
+.header-top {
+  background: #111;
+  color: #ccc;
+  padding: 0.3rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-top a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.75rem;
+}
+
+.header-top a:hover {
+  text-decoration: underline;
+}
+
+.header-top__left,
+.header-top__right {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.header-top .divider {
+  opacity: 0.4;
+}
+
+/* MAIN STRIP: LOGO + SEARCH + CONTACT + ICONS */
+
+.header-main {
+  background: #ffcc00;
+  justify-content: space-between;
+  padding: 0.9rem 2rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.header-logo {
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-transform: lowercase;
+  white-space: nowrap;
+}
+
+.header-logo span {
+  font-weight: 500;
+}
+
+.header-search {
+  flex: 1;
+  display: flex;
+  max-width: 600px;
+}
+
+.header-search input {
+  flex: 1;
+  padding: 0.6rem 0.8rem;
+  border: none;
+  border-radius: 999px 0 0 999px;
+  font-size: 0.9rem;
+}
+
+.header-search button {
+  border: none;
+  border-radius: 0 999px 999px 0;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  background: #111;
+  color: #fff;
+}
+
+.header-main__right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.header-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;
+}
+
+.header-contact__label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+}
+
+.header-contact__number {
+  font-weight: 700;
+}
+
+.header-icons {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.header-icon {
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.header-icon__symbol {
+  font-size: 1.1rem;
+}
+
+/* BECOME A SUPPLIER BUTTON */
+
+.header-supplier-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 1.1rem;
+  background: #111;
+  color: #ffcc00;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  border-radius: 999px;
+  border: 2px solid #111;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.header-supplier-btn:hover {
+  background: #222;
+  color: #ffcc00;
+}
+
+/* NAV BAR */
+
+.header-nav {
+  background: #fff;
+  padding: 0.5rem 2rem;
+  border-top: 1px solid #f3f3f3;
+}

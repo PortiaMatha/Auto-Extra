@@ -1,0 +1,214 @@
+/* Container */
+.builder {
+  margin-top: 1.2rem;
+  padding: 1rem 1.2rem;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Layout row */
+.builder__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.builder__col {
+  flex: 1;
+  min-width: 260px;
+}
+
+.builder__label {
+  display: block;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #777;
+  margin-bottom: 0.4rem;
+}
+
+/* Upload */
+
+.builder-upload input[type="file"] {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 0.35rem;
+}
+
+.builder-upload__hint {
+  font-size: 0.8rem;
+  color: #999;
+  margin: 0 0 0.6rem;
+}
+
+.builder-upload__preview {
+  width: 100%;
+  max-width: 260px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+
+.builder-upload__preview img {
+  width: 100%;
+  display: block;
+}
+
+/* Area radios */
+
+.builder-areas {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.builder-area {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+}
+
+.builder-area input[type="radio"] {
+  accent-color: #ffcc00;
+}
+
+/* Live preview + 360 */
+
+.builder-preview {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed #eee;
+}
+
+.builder-preview__title {
+  margin: 0 0 0.4rem;
+  font-size: 0.95rem;
+}
+
+.builder-preview__helper {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #999;
+}
+
+.builder-preview__car-label {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+/* 360 toggle buttons */
+
+.builder-view-toggle {
+  display: inline-flex;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.builder-view-toggle__btn {
+  border: 1px solid #ddd;
+  background: #f8f8f8;
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.builder-view-toggle__btn--active {
+  background: #ffcc00;
+  border-color: #ffcc00;
+}
+
+/* Canvas area */
+
+.builder-preview__canvas {
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #f8f8f8;
+  padding: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+}
+
+.builder-preview__car-wrapper {
+  position: relative;
+  max-width: 320px;
+  width: 100%;
+}
+
+.builder-preview__car-image {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+}
+
+/* Logo overlay – appears on top of the red cover */
+.builder-preview__logo {
+  position: absolute;
+  pointer-events: none;
+  mix-blend-mode: multiply; /* helps it look printed */
+  opacity: 0.95;
+}
+
+/* Example only, tweak until it matches your photo */
+
+.builder-preview__logo--full-cover {
+  top: 20%;
+  left: 40%;
+  width: 25%;
+  transform: perspective(600px) rotateY(-10deg) skewX(-5deg);
+}
+
+.builder-preview__logo--steering-wheel {
+  top: 42%;
+  left: 47%;
+  width: 12%;
+  transform: perspective(600px) rotateY(5deg) rotateX(5deg);
+}
+
+/* Different placement per area */
+.builder-preview__logo--full-cover {
+  top: 35%;
+  left: 40%;
+  width: 25%;
+}
+
+.builder-preview__logo--steering-wheel {
+  top: 42%;
+  left: 47%;
+  width: 12%;
+}
+
+.builder-preview__logo--seat-covers {
+  top: 38%;
+  left: 30%;
+  width: 18%;
+}
+
+.builder-preview__logo--car-mat {
+  bottom: 18%;
+  left: 35%;
+  width: 18%;
+}
+
+.builder-preview__placeholder {
+  font-size: 0.8rem;
+  color: #777;
+  text-align: center;
+  max-width: 260px;
+}
+.builder-preview__price {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #222;
+  padding-top:5rem;
+}

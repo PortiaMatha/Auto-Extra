@@ -1,0 +1,23 @@
+.nav {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.nav__link {
+  text-decoration: none;
+  color: #333;
+  padding: 0.3rem 0.1rem;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.nav__link:hover {
+  color: #000;
+  border-color: #ffcc00;
+}
+
+.nav__link--active {
+  border-color: #ffcc00;
+  font-weight: 600;
+}

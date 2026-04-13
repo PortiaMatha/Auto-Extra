@@ -1,0 +1,216 @@
+@import './PortalShared.css';
+
+.opage {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.opage__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.opage__title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 4px;
+}
+
+.opage__sub {
+  font-size: 13.5px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.opage__header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Status tabs */
+.opage__tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 2px solid #e8ecf0;
+  padding-bottom: 0;
+}
+
+.otab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 16px;
+  background: none;
+  border: none;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  font-family: inherit;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.15s;
+}
+
+.otab:hover { color: #111827; }
+
+.otab--active {
+  color: #4f6af5;
+  font-weight: 600;
+  border-bottom-color: #4f6af5;
+}
+
+.otab__count {
+  background: #f3f4f6;
+  color: #6b7280;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 10px;
+}
+
+.otab--active .otab__count {
+  background: #eff2ff;
+  color: #4f6af5;
+}
+
+/* Toolbar */
+.opage__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.opage__search {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 9px;
+  padding: 9px 14px;
+  flex: 1;
+  max-width: 360px;
+  transition: border-color 0.15s;
+}
+
+.opage__search:focus-within { border-color: #4f6af5; }
+
+.opage__search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 13.5px;
+  color: #374151;
+  font-family: inherit;
+  outline: none;
+}
+
+.opage__search-input::placeholder { color: #9ca3af; }
+
+.opage__toolbar-right {
+  display: flex;
+  gap: 8px;
+}
+
+/* Orders table */
+.otable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.otable thead tr { background: #f9fafb; }
+
+.otable th {
+  padding: 12px 14px;
+  text-align: left;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #e8ecf0;
+  white-space: nowrap;
+}
+
+.otable td {
+  padding: 13px 14px;
+  border-bottom: 1px solid #f3f4f6;
+  color: #374151;
+  vertical-align: middle;
+}
+
+.otable tbody tr:last-child td { border-bottom: none; }
+.otable tbody tr:hover          { background: #f9fafb; }
+.otable__row--selected          { background: #eff2ff !important; }
+
+.otable__id {
+  font-size: 13px;
+  font-weight: 700;
+  color: #4f6af5;
+  font-family: 'Courier New', monospace;
+}
+
+.otable__customer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.otable__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4f6af5, #7c90ff);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.otable__customer-name  { font-size: 13.5px; font-weight: 500; color: #111827; }
+.otable__customer-email { font-size: 11.5px; color: #9ca3af; }
+.otable__date           { color: #6b7280; font-size: 13px; }
+.otable__items          { color: #6b7280; font-size: 13px; }
+.otable__total          { font-weight: 600; color: #111827; }
+
+/* Order status badges */
+.ostatus {
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.ostatus--processing { background: #dbeafe; color: #1d4ed8; }
+.ostatus--delivered  { background: #d1fae5; color: #065f46; }
+.ostatus--pending    { background: #fef3c7; color: #92400e; }
+.ostatus--cancelled  { background: #fee2e2; color: #991b1b; }
+
+.view-btn {
+  padding: 6px 14px;
+  background: #f5f6ff;
+  color: #4f6af5;
+  border: 1.5px solid #d0d9ff;
+  border-radius: 7px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.view-btn:hover { background: #eff2ff; }

@@ -1,0 +1,59 @@
+/* ===== PORTAL LAYOUT ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.portal-layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f5f6fa;
+}
+
+.portal-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.portal-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  background: #f5f6fa;
+}
+
+/* --- Placeholder for non-dashboard sections --- */
+.portal-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  text-align: center;
+  color: #6b7280;
+}
+
+.portal-placeholder__icon {
+  font-size: 56px;
+  margin-bottom: 20px;
+}
+
+.portal-placeholder__title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1a2238;
+  margin: 0 0 10px;
+}
+
+.portal-placeholder__sub {
+  font-size: 15px;
+  color: #9ca3af;
+  margin: 0;
+}

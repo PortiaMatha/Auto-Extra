@@ -1,0 +1,61 @@
+.builder3d {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) 260px;
+  gap: 1.25rem;
+  align-items: stretch;
+  margin-top: 0.75rem;
+}
+
+.builder3d__canvas {
+  height: 360px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  overflow: hidden;
+  background: #111;
+}
+
+.builder3d__panel {
+  font-size: 0.85rem;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  padding: 0.8rem 0.9rem;
+}
+
+.builder3d__title {
+  margin: 0 0 0.2rem;
+  font-size: 0.9rem;
+}
+
+.builder3d__subtitle {
+  margin: 0 0 0.6rem;
+  color: #777;
+}
+
+.builder3d__controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.builder3d__controls span {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  color: #888;
+}
+
+.builder3d__controls input[type="range"] {
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .builder3d {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .builder3d__canvas {
+    height: 300px;
+  }
+}
