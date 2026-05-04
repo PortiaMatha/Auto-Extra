@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from "react";
 import "./ProductPage.css";
 import { useParams, Link } from "react-router-dom";
-import { getProductBySlug } from "../../data/products";
 import { useCart } from "../../context/CartContext";
 import { useWishlist } from "../../context/WishlistContext";
+import { useProducts } from "../../context/ProductsContext";
 
 type ProductPageParams = {
   slug?: string;
@@ -12,7 +12,8 @@ type ProductPageParams = {
 
 export function ProductPage() {
   const { slug } = useParams<ProductPageParams>();
-  const product = slug ? getProductBySlug(slug) : undefined;
+  const { products, loading } = useProducts();
+  const product = slug ? products.find(p => p.slug === slug) : undefined;
 
   // ---- Hooks: must always be at the top, no early return before these ----
   const { addItem } = useCart();
@@ -35,6 +36,14 @@ export function ProductPage() {
     setCustomBuild(false);
   }, [product]);
   // ------------------------------------------------------------------------
+
+  if (loading) {
+    return (
+      <div className="product-page">
+        <p>Loading product…</p>
+      </div>
+    );
+  }
 
   // If no product found, show a simple message
   if (!product) {
