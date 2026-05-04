@@ -37,7 +37,8 @@ create policy "Authenticated users have full access"
 -- Allow anon key full access for the portal (use authenticated in production)
 create policy "Anon key full access"
   on products for all
-  using (true);
+  using (true)
+  with check (true);
 
 -- ── Seed data ─────────────────────────────────────────────────────────
 insert into products (slug, title, category, brand, description, base_price, shipping_fee, material_options, size_options, colors, images, average_rating, review_count, stock, status) values

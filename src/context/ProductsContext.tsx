@@ -132,7 +132,7 @@ export function ProductsProvider({ children }: { children: ReactNode }) {
 
     if (error) {
       console.error('Failed to add product:', error.message);
-      throw error;
+      throw new Error(error.message);
     }
     // Real-time subscription will update state automatically;
     // but add optimistically in case subscription lags
@@ -152,7 +152,7 @@ export function ProductsProvider({ children }: { children: ReactNode }) {
 
     if (error) {
       console.error('Failed to update product:', error.message);
-      throw error;
+      throw new Error(error.message);
     }
     setProducts(prev => prev.map(p => p.id === product.id ? product : p));
   };

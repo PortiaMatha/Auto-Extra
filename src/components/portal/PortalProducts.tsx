@@ -262,8 +262,10 @@ function ProductModal({ initial, onSave, onClose }: ProductModalProps) {
       } else {
         await onSave(productData);
       }
-    } catch {
-      setError('Failed to save product. Please try again.');
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message
+        : (err as { message?: string })?.message ?? 'Unknown error';
+      setError(`Failed to save product: ${msg}`);
     } finally {
       setSaving(false);
     }
