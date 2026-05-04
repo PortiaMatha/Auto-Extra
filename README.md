@@ -1,46 +1,137 @@
-# Getting Started with Create React App
+# Auto-Extra | MotorCovers
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack e-commerce platform for automotive protective covers, built for the South African market. The platform serves both direct consumers (B2C) and retail partners (B2B) through a dual-model marketplace with an integrated 3D product customization experience.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+### Storefront
+- **Home Page** — Hero slider, featured product showcase, promotions, and FAQ
+- **Shop** — Product grid with multi-faceted filtering by category, brand, material, color, and price range
+- **Product Detail** — Image gallery, material/size selection, add to cart/wishlist, ratings and reviews, shipping calculator
+- **Interior Covers** — Dedicated section for seat covers, steering wheels, and floor mats
+- **Exterior Covers** — Full car covers, wheel covers, and window shades with weather protection specs
+- **Cart & Wishlist** — Full cart management with quantity controls and order totals
+- **Account** — User authentication (sign in, register, password recovery)
+- **Contact & Help** — Contact form and support documentation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 3D Custom Builder
+An interactive 3D product customizer built with Three.js and React Three Fiber. Users can:
+- Select their car make and model
+- Upload a custom logo or graphic
+- Adjust decal position, rotation, and scale on the 3D model in real time
+- Preview the finished product before ordering
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Supplier / Retail Partner Portal
+A dedicated portal for wholesale partners and retailers with:
+- **Dashboard** — Overview metrics and activity summary
+- **Product Management** — Full catalog and category control
+- **Order Management** — Orders, returns, and shipment tracking
+- **Financials** — Invoice generation and sales payouts
+- **Analytics** — Sales performance and customer insights
+- **Reviews** — Manage customer feedback
+- **Settings** — Store profile and preferences
 
-### `npm test`
+Retail partner plans available at three tiers: Basic (Free), Standard (R499/mo), and Premium (R999/mo).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Layer | Technology |
+|---|---|
+| Frontend Framework | React 19 + TypeScript |
+| Routing | React Router DOM 7 |
+| 3D Rendering | Three.js, React Three Fiber, Drei |
+| Backend / Database | Supabase (PostgreSQL + Auth + Realtime) |
+| State Management | React Context API |
+| Build Tool | Create React App + Craco |
+| Testing | React Testing Library + Jest |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Project Structure
 
-### `npm run eject`
+```
+src/
+├── api/              # API service layer
+├── components/       # Page and feature components
+│   ├── home/
+│   ├── shop/
+│   ├── builder/
+│   ├── builder3d/    # Three.js 3D customizer
+│   ├── interior/
+│   ├── exterior/
+│   ├── cart/
+│   ├── wishlist/
+│   ├── account/
+│   ├── portal/       # Supplier/admin portal
+│   └── layout/       # Header, Footer, Navigation, Sidebar
+├── context/          # Global state (Cart, Wishlist, Products, Orders, Supplier)
+├── data/             # Static product and vehicle data
+├── hooks/            # Custom React hooks
+├── lib/              # Supabase client and utilities
+└── types/            # TypeScript type definitions
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+---
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Getting Started
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Prerequisites
+- Node.js 18+
+- A Supabase project (for backend features)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Installation
 
-## Learn More
+```bash
+git clone https://github.com/PortiaMatha/Auto-Extra.git
+cd Auto-Extra
+npm install
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Environment Setup
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Create a `.env` file in the root directory:
+
+```env
+REACT_APP_SUPABASE_URL=your_supabase_url
+REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+### Run Locally
+
+```bash
+npm start
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+---
+
+## Database
+
+The Supabase schema files are included in the repo:
+- `supabase_schema.sql` — Main application schema
+- `supabase_customers_schema.sql` — Customer data schema
+
+---
+
+## Highlights
+
+- **3D Product Customizer** — Real-time logo placement and cover preview on 3D car models before purchasing
+- **Dual Revenue Model** — B2C storefront alongside a full B2B supplier marketplace
+- **South African Market Focus** — ZAR pricing, local vehicle brands (Toyota, VW, Isuzu, Chery, Mazda, and more)
+- **Custom Branding** — Logo upload and embroidery/print preview for personalized products
+- **Comprehensive Partner Portal** — Full management suite with analytics, payouts, and inventory control
+
+---
+
+Built with React, TypeScript, Three.js, and Supabase.
