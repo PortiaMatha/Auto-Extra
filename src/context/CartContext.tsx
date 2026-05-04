@@ -49,7 +49,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
   };
 
   const totalCount = items.reduce((s, i) => s + i.quantity, 0);
-  const totalPrice = items.reduce((s, i) => s + i.product.basePrice * i.quantity, 0);
+  const totalPrice = items.reduce((s, i) => {
+    const price = i.product.discountPrice && i.product.discountPrice < i.product.basePrice
+      ? i.product.discountPrice
+      : i.product.basePrice;
+    return s + price * i.quantity;
+  }, 0);
 
   return (
     <CartContext.Provider value={{

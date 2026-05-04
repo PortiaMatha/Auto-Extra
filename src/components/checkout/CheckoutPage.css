@@ -1,0 +1,231 @@
+.checkout-page {
+  min-height: 60vh;
+  padding: 2.5rem 1rem 4rem;
+  background: #f8f9fa;
+}
+
+.checkout-page__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.checkout-page__title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #1a1a1a;
+}
+
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 820px) {
+  .checkout-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Section titles ── */
+.checkout-section__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid #e8e8e8;
+  color: #1a1a1a;
+}
+
+/* ── Details form ── */
+.checkout-details {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+}
+
+.checkout-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 480px) {
+  .checkout-field-row { grid-template-columns: 1fr; }
+}
+
+.checkout-field {
+  margin-bottom: 1.1rem;
+}
+
+.checkout-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  color: #444;
+}
+
+.checkout-input {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.checkout-input:focus { border-color: #c0392b; }
+.checkout-input--error { border-color: #e53935; }
+
+.checkout-error {
+  font-size: 0.78rem;
+  color: #e53935;
+  margin-top: 0.25rem;
+}
+
+.checkout-sandbox-note {
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.82rem;
+  color: #7c5e00;
+  margin-bottom: 1.25rem;
+}
+
+/* ── Buttons ── */
+.checkout-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  transition: opacity 0.2s, background 0.2s;
+}
+
+.checkout-btn--primary {
+  background: #c0392b;
+  color: #fff;
+}
+
+.checkout-btn--primary:hover { background: #a93226; }
+.checkout-btn--primary:disabled { opacity: 0.65; cursor: not-allowed; }
+
+.checkout-btn--ghost {
+  background: transparent;
+  border: 1.5px solid #ddd;
+  color: #555;
+  margin-top: 0.75rem;
+}
+
+.checkout-btn--ghost:hover { background: #f5f5f5; }
+
+.checkout-btn--full {
+  width: 100%;
+}
+
+/* ── Summary ── */
+.checkout-summary {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+  position: sticky;
+  top: 1.5rem;
+}
+
+.checkout-items {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.checkout-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.checkout-item__img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #f0f0f0;
+  flex-shrink: 0;
+}
+
+.checkout-item__info {
+  flex: 1;
+}
+
+.checkout-item__title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 0.15rem;
+}
+
+.checkout-item__qty {
+  font-size: 0.78rem;
+  color: #888;
+  margin: 0;
+}
+
+.checkout-item__price {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  white-space: nowrap;
+}
+
+.checkout-totals {
+  border-top: 2px solid #e8e8e8;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.checkout-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.checkout-total-row--grand {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  padding-top: 0.5rem;
+  border-top: 1px solid #e8e8e8;
+  margin-top: 0.25rem;
+}
+
+/* ── Empty state ── */
+.checkout-empty {
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.checkout-empty h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  color: #444;
+}

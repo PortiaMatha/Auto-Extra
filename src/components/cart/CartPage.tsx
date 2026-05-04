@@ -9,8 +9,6 @@ const formatZAR = (v: number) =>
     maximumFractionDigits: 0,
   }).format(v);
 
-const PAYPAL_URL = "https://www.paypal.com";
-
 export function CartPage() {
   const { items, removeItem, updateQty, totalCount, totalPrice } = useCart();
 
@@ -123,17 +121,9 @@ export function CartPage() {
           </div>
           <p className="cart-summary__note">Shipping &amp; taxes calculated at checkout</p>
 
-          <a
-            href={PAYPAL_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="cart-summary__paypal-btn"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-              <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.59 3.025-2.566 4.643-5.813 4.643h-2.189c-.988 0-1.829.722-1.98 1.698l-1.12 7.104-.314 1.987a.64.64 0 0 0 .633.738h3.872c.524 0 .968-.382 1.05-.9l.436-2.764.28-1.774a1.07 1.07 0 0 1 1.05-.9h.663c3.602 0 6.42-1.463 7.241-5.695.35-1.79.169-3.286-.66-4.343a3.685 3.685 0 0 0-.501-.508z"/>
-            </svg>
-            Proceed To Payment
-          </a>
+          <Link to="/checkout" className="cart-summary__payfast-btn">
+            Proceed to Checkout
+          </Link>
 
           <Link to="/shop" className="cart-summary__continue">
             ← Continue Shopping

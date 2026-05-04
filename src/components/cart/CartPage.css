@@ -273,14 +273,13 @@
   margin: -0.5rem 0 0;
 }
 
-/* PayPal button */
-.cart-summary__paypal-btn {
+/* PayFast checkout button */
+.cart-summary__payfast-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
   padding: 0.9rem 1.5rem;
-  background: #003087;
+  background: #c0392b;
   color: #fff;
   border-radius: 8px;
   font-size: 1rem;
@@ -290,12 +289,12 @@
   text-align: center;
 }
 
-.cart-summary__paypal-btn:hover {
-  background: #001f5b;
+.cart-summary__payfast-btn:hover {
+  background: #a93226;
   transform: translateY(-1px);
 }
 
-.cart-summary__paypal-btn:active {
+.cart-summary__payfast-btn:active {
   transform: translateY(0);
 }
 

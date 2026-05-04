@@ -20,6 +20,9 @@ import { AccountPage } from "./components/account/AccountPage";
 import { SignInPage } from "./components/account/SignInPage";
 import { HelpPage } from "./components/help/HelpPage";
 import { WishlistPage } from "./components/wishlist/WishlistPage";
+import { CheckoutPage } from "./components/checkout/CheckoutPage";
+import { CheckoutSuccess } from "./components/checkout/CheckoutSuccess";
+import { CheckoutCancel } from "./components/checkout/CheckoutCancel";
 
 function App() {
   return (
@@ -50,8 +53,11 @@ function App() {
                 <Route path="/cart"          element={<CartPage />} />
                 <Route path="/account"       element={<AccountPage />} />
                 <Route path="/signin"        element={<SignInPage />} />
-                <Route path="/help"          element={<HelpPage />} />
-                <Route path="/wishlist"      element={<WishlistPage />} />
+                <Route path="/help"              element={<HelpPage />} />
+                <Route path="/wishlist"          element={<WishlistPage />} />
+                <Route path="/checkout"          element={<CheckoutPage />} />
+                <Route path="/checkout/success"  element={<CheckoutSuccess />} />
+                <Route path="/checkout/cancel"   element={<CheckoutCancel />} />
               </Routes>
             </AppLayout>
           }
