@@ -149,3 +149,62 @@ insert into products (slug, title, category, brand, description, base_price, shi
   ARRAY['/Products/seat-cover-back.jpg'],
   4.8, 12, 18, 'Active'
 );
+
+-- ── Storage: product-images bucket policies ───────────────────────────
+-- Run these in Supabase Dashboard → SQL Editor
+
+-- Drop old broken policies first (AND logic on extensions is always false)
+DROP POLICY IF EXISTS "Allow image uploads"  ON storage.objects;
+DROP POLICY IF EXISTS "Allow image updates"  ON storage.objects;
+DROP POLICY IF EXISTS "Allow image deletes"  ON storage.objects;
+DROP POLICY IF EXISTS "Allow public image reads" ON storage.objects;
+
+-- INSERT (upload) — extension check uses OR, not AND
+CREATE POLICY "Allow image uploads"
+ON storage.objects FOR INSERT
+WITH CHECK (
+  bucket_id = 'product-images'
+  AND (
+    storage.extension(name) = 'jpg'
+    OR storage.extension(name) = 'jpeg'
+    OR storage.extension(name) = 'png'
+    OR storage.extension(name) = 'webp'
+  )
+  AND lower((storage.foldername(name))[1]) = 'public'
+  AND (auth.role() = 'anon' OR auth.role() = 'authenticated')
+);
+
+-- UPDATE
+CREATE POLICY "Allow image updates"
+ON storage.objects FOR UPDATE
+USING (
+  bucket_id = 'product-images'
+  AND (
+    storage.extension(name) = 'jpg'
+    OR storage.extension(name) = 'jpeg'
+    OR storage.extension(name) = 'png'
+    OR storage.extension(name) = 'webp'
+  )
+  AND lower((storage.foldername(name))[1]) = 'public'
+  AND (auth.role() = 'anon' OR auth.role() = 'authenticated')
+);
+
+-- DELETE
+CREATE POLICY "Allow image deletes"
+ON storage.objects FOR DELETE
+USING (
+  bucket_id = 'product-images'
+  AND (
+    storage.extension(name) = 'jpg'
+    OR storage.extension(name) = 'jpeg'
+    OR storage.extension(name) = 'png'
+    OR storage.extension(name) = 'webp'
+  )
+  AND lower((storage.foldername(name))[1]) = 'public'
+  AND (auth.role() = 'anon' OR auth.role() = 'authenticated')
+);
+
+-- SELECT (public reads — no restriction needed)
+CREATE POLICY "Allow public image reads"
+ON storage.objects FOR SELECT
+USING (bucket_id = 'product-images');
