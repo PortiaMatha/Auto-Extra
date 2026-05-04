@@ -9,6 +9,7 @@ create table if not exists products (
   brand           text        not null,
   description     text        not null default '',
   base_price      numeric     not null default 0,
+  discount_price  numeric     null,
   shipping_fee    numeric     not null default 0,
   material_options text[]     not null default '{}',
   size_options    text[]      not null default '{}',

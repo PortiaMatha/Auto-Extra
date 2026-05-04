@@ -10,7 +10,7 @@ type Props = { product: Product };
 
 export function ProductCard({ product }: Props) {
   const { addItem } = useCart();
-  const oldPrice = Math.round(product.basePrice * 1.2);
+  const onSale = !!product.discountPrice && product.discountPrice < product.basePrice;
 
   return (
     <article className="pc">
@@ -19,7 +19,7 @@ export function ProductCard({ product }: Props) {
         <Link to={`/product/${product.slug}`}>
           <img src={product.images[0]} alt={product.title} className="pc__img" />
         </Link>
-        <span className="pc__badge">Sale</span>
+        {onSale && <span className="pc__badge">Sale</span>}
       </div>
 
       {/* Body */}
@@ -37,8 +37,14 @@ export function ProductCard({ product }: Props) {
         <p className="pc__desc">{product.description}</p>
 
         <div className="pc__prices">
-          <span className="pc__price pc__price--new">{formatZAR(product.basePrice)}</span>
-          <span className="pc__price pc__price--old">{formatZAR(oldPrice)}</span>
+          {onSale ? (
+            <>
+              <span className="pc__price pc__price--new">{formatZAR(product.discountPrice!)}</span>
+              <span className="pc__price pc__price--old">{formatZAR(product.basePrice)}</span>
+            </>
+          ) : (
+            <span className="pc__price pc__price--new">{formatZAR(product.basePrice)}</span>
+          )}
         </div>
       </div>
 

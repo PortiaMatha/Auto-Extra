@@ -11,6 +11,7 @@ interface ProductRow {
   brand: string;
   description: string;
   base_price: number;
+  discount_price: number | null;
   shipping_fee: number;
   material_options: string[];
   size_options: string[];
@@ -31,6 +32,7 @@ function rowToProduct(row: ProductRow): Product {
     brand: row.brand,
     description: row.description,
     basePrice: row.base_price,
+    discountPrice: row.discount_price ?? undefined,
     shippingFee: row.shipping_fee,
     materialOptions: row.material_options ?? [],
     sizeOptions: row.size_options ?? [],
@@ -51,6 +53,7 @@ function productToRow(p: Omit<Product, 'id'>): Omit<ProductRow, 'id'> {
     brand: p.brand,
     description: p.description,
     base_price: p.basePrice,
+    discount_price: p.discountPrice ?? null,
     shipping_fee: p.shippingFee,
     material_options: p.materialOptions,
     size_options: p.sizeOptions,

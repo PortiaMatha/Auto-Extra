@@ -2,7 +2,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import './PortalProducts.css';
 import { useProducts } from '../../context/ProductsContext';
 import { supabase } from '../../lib/supabase';
-import { Product, ProductCategory, ProductStatus, MATERIAL_OPTIONS, COLOR_OPTIONS } from '../../data/products';
+import { Product, ProductCategory, ProductStatus, MATERIAL_OPTIONS, COLOR_OPTIONS, BRAND_OPTIONS } from '../../data/products';
 
 /* ── Image upload constants ───────────────────────────────────────── */
 
@@ -136,6 +136,7 @@ type FormData = {
   brand: string;
   description: string;
   basePrice: string;
+  discountPrice: string;
   shippingFee: string;
   stock: string;
   status: ProductStatus;
@@ -164,7 +165,7 @@ function slugify(title: string): string {
 function emptyForm(): FormData {
   return {
     title: '', category: 'interior', brand: '', description: '',
-    basePrice: '', shippingFee: '', stock: '', status: 'Active',
+    basePrice: '', discountPrice: '', shippingFee: '', stock: '', status: 'Active',
     materialOptions: [], sizeOptions: [], colors: [],
     imageUrls: [], pendingFiles: [],
   };
@@ -187,6 +188,7 @@ function ProductModal({ initial, onSave, onClose }: ProductModalProps) {
           brand: initial.brand,
           description: initial.description,
           basePrice: String(initial.basePrice),
+          discountPrice: initial.discountPrice ? String(initial.discountPrice) : '',
           shippingFee: String(initial.shippingFee),
           stock: String(initial.stock),
           status: initial.status,
@@ -242,9 +244,12 @@ function ProductModal({ initial, onSave, onClose }: ProductModalProps) {
       slug: slugify(form.title),
       title: form.title.trim(),
       category: form.category,
-      brand: form.brand.trim(),
+      brand: form.brand,
       description: form.description.trim(),
       basePrice: Number(form.basePrice),
+      discountPrice: form.discountPrice && !isNaN(Number(form.discountPrice))
+        ? Number(form.discountPrice)
+        : undefined,
       shippingFee: Number(form.shippingFee) || 0,
       stock: Number(form.stock),
       status: form.status,
@@ -320,12 +325,16 @@ function ProductModal({ initial, onSave, onClose }: ProductModalProps) {
 
           <div className="pmodal__row">
             <label className="pmodal__label">Brand *</label>
-            <input
-              className="pmodal__input"
+            <select
+              className="pmodal__select"
               value={form.brand}
               onChange={e => set('brand', e.target.value)}
-              placeholder="e.g. AutoExtras"
-            />
+            >
+              <option value="">Select a brand…</option>
+              {BRAND_OPTIONS.map(b => (
+                <option key={b} value={b}>{b}</option>
+              ))}
+            </select>
           </div>
 
           <div className="pmodal__row">
@@ -352,6 +361,20 @@ function ProductModal({ initial, onSave, onClose }: ProductModalProps) {
               />
             </div>
             <div>
+              <label className="pmodal__label">Discount Price (R)</label>
+              <input
+                className="pmodal__input"
+                type="number"
+                min="0"
+                value={form.discountPrice}
+                onChange={e => set('discountPrice', e.target.value)}
+                placeholder="Leave empty if no sale"
+              />
+            </div>
+          </div>
+
+          <div className="pmodal__row pmodal__row--2col">
+            <div>
               <label className="pmodal__label">Shipping Fee (R)</label>
               <input
                 className="pmodal__input"
@@ -362,18 +385,17 @@ function ProductModal({ initial, onSave, onClose }: ProductModalProps) {
                 placeholder="e.g. 150"
               />
             </div>
-          </div>
-
-          <div className="pmodal__row">
-            <label className="pmodal__label">Stock Quantity *</label>
-            <input
-              className="pmodal__input"
-              type="number"
-              min="0"
-              value={form.stock}
-              onChange={e => set('stock', e.target.value)}
-              placeholder="e.g. 25"
-            />
+            <div>
+              <label className="pmodal__label">Stock Quantity *</label>
+              <input
+                className="pmodal__input"
+                type="number"
+                min="0"
+                value={form.stock}
+                onChange={e => set('stock', e.target.value)}
+                placeholder="e.g. 25"
+              />
+            </div>
           </div>
 
           {/* Image uploader */}

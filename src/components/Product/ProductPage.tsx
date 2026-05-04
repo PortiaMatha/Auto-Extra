@@ -79,9 +79,11 @@ export function ProductPage() {
       currency: "ZAR",
     }).format(value);
 
-  const price = formatZAR(product.basePrice);
+  const onSale = !!product.discountPrice && product.discountPrice < product.basePrice;
+  const activePrice = onSale ? product.discountPrice! : product.basePrice;
+  const price = formatZAR(activePrice);
   const shippingFee = formatZAR(product.shippingFee);
-  const total = formatZAR(product.basePrice * quantity + product.shippingFee);
+  const total = formatZAR(activePrice * quantity + product.shippingFee);
 
   return (
     <div className="product-page">
@@ -137,7 +139,15 @@ export function ProductPage() {
           {/* Price */}
           <div className="product-price">
             <span className="product-price__label">Price:</span>
-            <span className="product-price__value">{price}</span>
+            {onSale ? (
+              <>
+                <span className="product-price__value">{price}</span>
+                <span className="product-price__original">{formatZAR(product.basePrice)}</span>
+                <span className="product-price__sale-badge">Sale</span>
+              </>
+            ) : (
+              <span className="product-price__value">{price}</span>
+            )}
           </div>
 
           {/* Material */}

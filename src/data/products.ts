@@ -10,6 +10,7 @@ export interface Product {
   brand: string;
   description: string;
   basePrice: number;
+  discountPrice?: number;
   shippingFee: number;
   materialOptions: string[];
   sizeOptions: string[];
@@ -20,6 +21,26 @@ export interface Product {
   stock: number;
   status: ProductStatus;
 }
+
+/* ── Brand options (for dropdowns) ──────────────────────────── */
+
+export const BRAND_OPTIONS = [
+  'AutoExtras',
+  'BMW',
+  'Chery',
+  'Custom',
+  'Ford',
+  'Honda',
+  'Hyundai',
+  'Isuzu',
+  'Kia',
+  'Mazda',
+  'Nissan',
+  'Suzuki',
+  'Toyota',
+  'Universal',
+  'Volkswagen',
+];
 
 /* ── Brand logos ─────────────────────────────────────────────── */
 
