@@ -135,3 +135,11 @@ The Supabase schema files are included in the repo:
 ---
 
 Built with React, TypeScript, Three.js, and Supabase.
+
+---
+
+## License
+
+Copyright (c) 2026 Portia Matha. All Rights Reserved.
+
+This project and its source code are the exclusive property of Portia Matha. No part of this project may be copied, reproduced, distributed, modified, or used in any form without the express prior written permission of the owner. See the [LICENSE](./LICENSE) file for details.
