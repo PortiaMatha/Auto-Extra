@@ -4,6 +4,7 @@
 
 -- ── Customers ─────────────────────────────────────────────────────────
 create table if not exists customers (
+  
   id          bigserial primary key,
   full_name   text        not null,
   email       text        not null unique,
