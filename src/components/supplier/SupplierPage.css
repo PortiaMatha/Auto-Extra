@@ -80,12 +80,12 @@
 }
 
 .sp-hero__btn--primary {
-  background: #e53935;
+  background: #0d1526;
   color: #fff;
-  border: 2px solid #e53935;
+  border: 2px solid #0d1526;
 }
 
-.sp-hero__btn--primary:hover { background: #c62828; border-color: #c62828; }
+.sp-hero__btn--primary:hover { background: #0a1020; border-color: #0a1020; }
 
 .sp-hero__btn--ghost {
   background: transparent;
@@ -209,6 +209,9 @@
   min-width: 180px;
   text-align: center;
   padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .sp-step__num {
@@ -236,8 +239,28 @@
 .sp-step__desc {
   font-size: 0.86rem;
   color: #9ab;
-  margin: 0;
+  margin: 0 0 1rem;
   line-height: 1.5;
+}
+
+.sp-step__btn {
+  margin-top: auto;
+  padding: 0.5rem 1.4rem;
+  border-radius: 999px;
+  border: 1.5px solid #ffcc00;
+  background: transparent;
+  color: #ffcc00;
+  font-size: 0.84rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  align-self: flex-start;
+}
+
+.sp-step__btn:hover {
+  background: #ffcc00;
+  color: #111;
 }
 
 .sp-step__arrow {
@@ -275,8 +298,8 @@
 }
 
 .sp-plan--featured {
-  border-color: #e53935;
-  box-shadow: 0 6px 24px rgba(229,57,53,0.15);
+  border-color: #0d1526;
+  box-shadow: 0 6px 24px rgba(13,21,38,0.15);
 }
 
 .sp-plan--selected {
@@ -289,7 +312,7 @@
   top: -13px;
   left: 50%;
   transform: translateX(-50%);
-  background: #e53935;
+  background: #0d1526;
   color: #fff;
   font-size: 0.72rem;
   font-weight: 700;
@@ -348,7 +371,7 @@
 }
 
 .sp-plan__check {
-  color: #22c55e;
+  color: #ffcc00;
   font-weight: 700;
   flex-shrink: 0;
   margin-top: 1px;
@@ -375,12 +398,12 @@
 .sp-plan__cta--dark:hover { background: #333; }
 
 .sp-plan__cta--red {
-  background: #e53935;
+  background: #0d1526;
   color: #fff;
-  border-color: #e53935;
+  border-color: #0d1526;
 }
 
-.sp-plan__cta--red:hover { background: #c62828; }
+.sp-plan__cta--red:hover { background: #0a1020; }
 
 /* ── PARTNER SECTION ───────────────────────────────── */
 .sp-partner-section {
@@ -531,7 +554,7 @@
 
 .sp-form__submit {
   padding: 0.85rem;
-  background: #e53935;
+  background: #0d1526;
   color: #fff;
   border: none;
   border-radius: 999px;
@@ -543,7 +566,7 @@
   margin-top: 0.3rem;
 }
 
-.sp-form__submit:hover  { background: #c62828; }
+.sp-form__submit:hover  { background: #0a1020; }
 .sp-form__submit:active { transform: scale(0.97); }
 
 .sp-form__privacy {
@@ -595,4 +618,217 @@
   .sp-hero__content { padding: 2rem 1.4rem; }
   .sp-hero__title   { font-size: 1.8rem; }
   .sp-form__row     { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .sp-hero { min-height: 300px; border-radius: 10px; }
+
+  .sp-hero__title { font-size: 1.8rem; }
+
+  .sp-hero__content { padding: 1.5rem 1rem; }
+
+  .sp-benefits-grid { grid-template-columns: 1fr; gap: 1rem; }
+
+  .sp-plans { grid-template-columns: 1fr; gap: 1rem; }
+
+  .sp-plan { padding: 1.2rem 1rem; }
+
+  .sp-partner-section { grid-template-columns: 1fr; gap: 1.5rem; }
+
+  .sp-section-title { font-size: 1.4rem; }
+
+  .sp-steps { gap: 0.75rem; }
+}
+
+@media (max-width: 480px) {
+  .sp-hero__title { font-size: 1.4rem; }
+  .sp-hero__sub { font-size: 0.9rem; }
+  .sp-plan--featured { transform: none; }
+}
+
+/* ── FEATURES & BENEFITS ────────────────────────────── */
+.sp-features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+@media (max-width: 1024px) { .sp-features-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px)  { .sp-features-grid { grid-template-columns: 1fr; } }
+
+.sp-feature-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 1.4rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: background 0.18s, border-color 0.18s;
+}
+
+.sp-feature-card:hover {
+  background: rgba(255,204,0,0.08);
+  border-color: rgba(255,204,0,0.3);
+}
+
+.sp-feature-card__icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.sp-feature-card__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.sp-feature-card__desc {
+  font-size: 0.84rem;
+  color: #9ab;
+  margin: 0;
+  line-height: 1.55;
+}
+
+.sp-features__cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── AUTH MODALS ────────────────────────────────────── */
+.sp-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.sp-modal {
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 420px;
+  padding: 2rem 2rem 1.5rem;
+  position: relative;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.22);
+}
+
+.sp-modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #9ca3af;
+  line-height: 1;
+  padding: 4px;
+  transition: color 0.15s;
+}
+.sp-modal__close:hover { color: #111; }
+
+.sp-modal__title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #111;
+  margin: 0 0 0.25rem;
+}
+
+.sp-modal__sub {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0 0 1.4rem;
+}
+
+.sp-modal__error {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.85rem;
+  margin: 0 0 1rem;
+}
+
+.sp-modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.sp-modal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.sp-modal__label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.sp-modal__input {
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 0.6rem 0.85rem;
+  font-size: 0.9rem;
+  color: #111;
+  font-family: inherit;
+  transition: border-color 0.15s;
+  background: #fff;
+}
+
+.sp-modal__input:focus {
+  outline: none;
+  border-color: #ffcc00;
+}
+
+.sp-modal__btn {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  margin-top: 0.3rem;
+}
+
+.sp-modal__btn--primary {
+  background: #ffcc00;
+  color: #111;
+}
+
+.sp-modal__btn--primary:hover  { background: #f0be00; }
+.sp-modal__btn--primary:active { transform: scale(0.98); }
+
+.sp-modal__footer-text {
+  text-align: center;
+  font-size: 0.84rem;
+  color: #6b7280;
+  margin: 1rem 0 0;
+}
+
+.sp-modal__link {
+  background: none;
+  border: none;
+  color: #b8920a;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: inherit;
+  padding: 0;
+  text-decoration: underline;
 }

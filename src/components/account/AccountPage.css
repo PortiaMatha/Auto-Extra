@@ -1,0 +1,49 @@
+.account-page {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+.account-card {
+  text-align: center;
+  max-width: 420px;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+.account-icon { color: #94a3b8; margin-bottom: 0.5rem; }
+.account-title { font-size: 1.5rem; font-weight: 800; color: #1e293b; margin: 0 0 0.5rem; }
+.account-sub { color: #64748b; margin: 0 0 1.5rem; font-size: 0.9rem; }
+.account-cta {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  background: #ffcc00;
+  color: #111;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.account-cta:hover { background: #e6b800; }
+.account-features {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #f1f5f9;
+}
+.account-feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  color: #64748b;
+  font-weight: 500;
+}
+.account-feature span:first-child { font-size: 1.3rem; }

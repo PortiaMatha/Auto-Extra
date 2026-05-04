@@ -1,23 +1,55 @@
 .car-selector {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.7rem;
 }
 
 .car-selector__field {
   display: flex;
   flex-direction: column;
-  min-width: 180px;
-  font-size: 0.9rem;
+  gap: 0.3rem;
+  font-size: 0.85rem;
 }
 
 .car-selector__field label {
-  margin-bottom: 0.25rem;
-  color: #555;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #999;
 }
 
 .car-selector__field select {
-  padding: 0.4rem 0.5rem;
-  border-radius: 4px;
-  border: 1px solid #ddd;
+  padding: 0.55rem 2rem 0.55rem 0.75rem;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-family: inherit;
+  font-weight: 600;
+  color: #222;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23555' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.65rem center;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.car-selector__field select:focus {
+  border-color: #ffcc00;
+  box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.18);
+}
+
+.car-selector__field select:hover {
+  border-color: #ccc;
+}
+
+@media (max-width: 600px) {
+  .car-selector {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+  }
 }

@@ -27,8 +27,8 @@
 
 .product-main {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr);
-  gap: 2rem;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr);
+  gap: 5rem;
 }
 
 /* Gallery */
@@ -41,9 +41,12 @@
 }
 
 .product-gallery__main img {
-  width: 100%;
-  display: block;
-  border-radius: 8px;
+    width: auto;
+    max-width: 500px;
+    text-align: center;
+    margin: auto;
+    display: block;
+    border-radius: 8px;
 }
 
 .product-gallery__thumbs {

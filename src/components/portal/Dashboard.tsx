@@ -1,5 +1,6 @@
 import React from 'react';
 import './Dashboard.css';
+import { PortalSection } from './PortalLayout';
 
 // --- Types ---
 type DataPoint = { day: string; value: number };
@@ -19,6 +20,7 @@ type StatCard = {
   change: string;
   changeType: 'positive' | 'negative' | 'neutral';
   action: string;
+  section: PortalSection;
   accentColor: string;
   icon: string;
 };
@@ -42,6 +44,7 @@ const statCards: StatCard[] = [
     change: '+8.2% ↑',
     changeType: 'positive',
     action: 'View Reports',
+    section: 'sales-payouts',
     accentColor: '#f97316',
     icon: '📈',
   },
@@ -52,6 +55,7 @@ const statCards: StatCard[] = [
     change: '+3 new this week',
     changeType: 'positive',
     action: 'View Orders',
+    section: 'orders',
     accentColor: '#3b82f6',
     icon: '🛒',
   },
@@ -62,6 +66,7 @@ const statCards: StatCard[] = [
     change: 'Next payout: 3 days',
     changeType: 'neutral',
     action: 'View Payouts',
+    section: 'sales-payouts',
     accentColor: '#22c55e',
     icon: '💳',
   },
@@ -72,6 +77,7 @@ const statCards: StatCard[] = [
     change: '2 pending review',
     changeType: 'neutral',
     action: 'Manage Products',
+    section: 'products',
     accentColor: '#8b5cf6',
     icon: '📦',
   },
@@ -85,11 +91,11 @@ const recentOrders: Order[] = [
   { id: 'AE70040', customer: 'David B.', amount: 'R3,450', status: 'Delivered', time: '3 days ago' },
 ];
 
-const quickActions = [
-  { icon: '📦', label: 'Add New Product', desc: 'List a new item', bg: '#fef3c7', color: '#d97706' },
-  { icon: '📋', label: 'View Orders', desc: 'Manage orders', bg: '#dbeafe', color: '#2563eb' },
-  { icon: '🚚', label: 'Configure Shipping', desc: 'Shipping settings', bg: '#e0e7ff', color: '#4338ca' },
-  { icon: '🏪', label: 'Update Store', desc: 'Edit store profile', bg: '#d1fae5', color: '#059669' },
+const quickActions: { icon: string; label: string; desc: string; bg: string; color: string; section: PortalSection }[] = [
+  { icon: '📦', label: 'Add New Product', desc: 'List a new item', bg: '#fef3c7', color: '#d97706', section: 'products' },
+  { icon: '📋', label: 'View Orders', desc: 'Manage orders', bg: '#dbeafe', color: '#2563eb', section: 'orders' },
+  { icon: '🚚', label: 'Configure Shipping', desc: 'Shipping settings', bg: '#e0e7ff', color: '#4338ca', section: 'shipments' },
+  { icon: '🏪', label: 'Update Store', desc: 'Edit store profile', bg: '#d1fae5', color: '#059669', section: 'store-profile' },
 ];
 
 // --- SVG Chart ---
@@ -181,7 +187,7 @@ function StatusBadge({ status }: { status: Order['status'] }) {
 }
 
 // --- Dashboard ---
-export function Dashboard() {
+export function Dashboard({ onNavigate }: { onNavigate: (section: PortalSection) => void }) {
   return (
     <div className="dashboard">
       {/* Page Header */}
@@ -218,7 +224,7 @@ export function Dashboard() {
               <span className={`stat-card__change stat-card__change--${card.changeType}`}>
                 {card.change}
               </span>
-              <a href="#" className="stat-card__action">{card.action} →</a>
+              <button className="stat-card__action" onClick={() => onNavigate(card.section)}>{card.action} →</button>
             </div>
           </div>
         ))}
@@ -237,7 +243,7 @@ export function Dashboard() {
         <div className="card">
           <div className="card-header">
             <h3 className="card-title">Recent Orders</h3>
-            <a href="#" className="card-link">View All Orders →</a>
+            <button className="card-link" onClick={() => onNavigate('orders')}>View All Orders →</button>
           </div>
           <div className="orders-list">
             {recentOrders.map(order => (
@@ -262,11 +268,11 @@ export function Dashboard() {
         <div className="card card--wide">
           <div className="card-header">
             <h3 className="card-title">Quick Actions</h3>
-            <a href="#" className="card-link">View all →</a>
+            <button className="card-link" onClick={() => onNavigate('products')}>View all →</button>
           </div>
           <div className="quick-actions-grid">
             {quickActions.map((a, i) => (
-              <button key={i} className="quick-action-card">
+              <button key={i} className="quick-action-card" onClick={() => onNavigate(a.section)}>
                 <span className="quick-action-icon" style={{ background: a.bg, color: a.color }}>
                   {a.icon}
                 </span>
@@ -308,7 +314,7 @@ export function Dashboard() {
               </div>
             </div>
           </div>
-          <a href="#" className="perf-view-link">View Performance Details →</a>
+          <button className="perf-view-link" onClick={() => onNavigate('analytics')}>View Performance Details →</button>
         </div>
       </div>
     </div>

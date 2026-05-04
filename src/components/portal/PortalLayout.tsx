@@ -7,6 +7,14 @@ import { PortalProducts } from './PortalProducts';
 import { PortalOrders } from './PortalOrders';
 import { PortalStoreProfile } from './PortalStoreProfile';
 import { PortalSalesPayouts } from './PortalSalesPayouts';
+import { PortalCategories } from './PortalCategories';
+import { PortalCustomization } from './PortalCustomization';
+import { PortalReturns } from './PortalReturns';
+import { PortalShipments } from './PortalShipments';
+import { PortalInvoices } from './PortalInvoices';
+import { PortalAnalytics } from './PortalAnalytics';
+import { PortalReviews } from './PortalReviews';
+import { PortalSettings } from './PortalSettings';
 
 export type PortalSection =
   | 'dashboard'
@@ -23,25 +31,23 @@ export type PortalSection =
   | 'reviews'
   | 'settings';
 
-function formatSection(s: PortalSection): string {
-  return s.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-}
 
-function renderSection(section: PortalSection) {
+function renderSection(section: PortalSection, onNavigate: (s: PortalSection) => void) {
   switch (section) {
-    case 'dashboard':    return <Dashboard />;
-    case 'store-profile': return <PortalStoreProfile />;
-    case 'products':     return <PortalProducts />;
-    case 'orders':       return <PortalOrders />;
-    case 'sales-payouts': return <PortalSalesPayouts />;
-    default:
-      return (
-        <div className="portal-placeholder">
-          <div className="portal-placeholder__icon">🚧</div>
-          <h2 className="portal-placeholder__title">{formatSection(section)}</h2>
-          <p className="portal-placeholder__sub">This section is under construction.</p>
-        </div>
-      );
+    case 'dashboard':      return <Dashboard onNavigate={onNavigate} />;
+    case 'store-profile':  return <PortalStoreProfile />;
+    case 'products':       return <PortalProducts />;
+    case 'categories':     return <PortalCategories />;
+    case 'customization':  return <PortalCustomization />;
+    case 'orders':         return <PortalOrders />;
+    case 'returns':        return <PortalReturns />;
+    case 'shipments':      return <PortalShipments />;
+    case 'invoices':       return <PortalInvoices />;
+    case 'sales-payouts':  return <PortalSalesPayouts />;
+    case 'analytics':      return <PortalAnalytics />;
+    case 'reviews':        return <PortalReviews />;
+    case 'settings':       return <PortalSettings />;
+    default:               return null;
   }
 }
 
@@ -54,7 +60,7 @@ export function PortalLayout() {
       <div className="portal-body">
         <PortalTopBar />
         <main className="portal-content">
-          {renderSection(activeSection)}
+          {renderSection(activeSection, setActiveSection)}
         </main>
       </div>
     </div>

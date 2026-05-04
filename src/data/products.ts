@@ -1,5 +1,6 @@
 // src/data/products.ts
 export type ProductCategory = "interior" | "exterior" | "custom";
+export type ProductStatus = "Active" | "Inactive";
 
 export interface Product {
   id: number;
@@ -16,7 +17,26 @@ export interface Product {
   images: string[];
   averageRating: number;
   reviewCount: number;
+  stock: number;
+  status: ProductStatus;
 }
+
+/* ── Brand logos ─────────────────────────────────────────────── */
+
+export const BRAND_LOGOS: { name: string; logo: string }[] = [
+  { name: 'BMW',        logo: '/Car-Logos/bmw-logo.png' },
+  { name: 'Chery',      logo: '/Car-Logos/chery-logo.png' },
+  { name: 'Ford',       logo: '/Car-Logos/ford-logo.png' },
+  { name: 'Honda',      logo: '/Car-Logos/honda-logo.webp' },
+  { name: 'Hyundai',    logo: '/Car-Logos/hyundai-logo.png' },
+  { name: 'Isuzu',      logo: '/Car-Logos/isuzu-logo.png' },
+  { name: 'Kia',        logo: '/Car-Logos/kia-logo.png' },
+  { name: 'Mazda',      logo: '/Car-Logos/mazda-logo.png' },
+  { name: 'Nissan',     logo: '/Car-Logos/nissan-logo.jpg' },
+  { name: 'Suzuki',     logo: '/Car-Logos/suzuki-logo.png' },
+  { name: 'Toyota',     logo: '/Car-Logos/toyota-logo.png' },
+  { name: 'Volkswagen', logo: '/Car-Logos/Volkswagen-logo.png' },
+];
 
 /* ── Shared filter options ───────────────────────────────────── */
 
@@ -64,6 +84,8 @@ export const products: Product[] = [
     ],
     averageRating: 4.6,
     reviewCount: 18,
+    stock: 20,
+    status: 'Active',
   },
   {
     id: 2,
@@ -84,6 +106,8 @@ export const products: Product[] = [
     ],
     averageRating: 4.3,
     reviewCount: 9,
+    stock: 14,
+    status: 'Active',
   },
   {
     id: 3,
@@ -104,6 +128,8 @@ export const products: Product[] = [
     ],
     averageRating: 4.3,
     reviewCount: 9,
+    stock: 10,
+    status: 'Active',
   },
   {
     id: 4,
@@ -124,6 +150,8 @@ export const products: Product[] = [
     ],
     averageRating: 4.3,
     reviewCount: 9,
+    stock: 7,
+    status: 'Active',
   },
   {
     id: 5,
@@ -140,6 +168,8 @@ export const products: Product[] = [
     images: ['/Products/car-cover.jpg', '/Products/white-car.jpg'],
     averageRating: 4.5,
     reviewCount: 22,
+    stock: 25,
+    status: 'Active',
   },
   {
     id: 6,
@@ -156,6 +186,8 @@ export const products: Product[] = [
     images: ['/Products/white-car.jpg', '/Products/car-cover.jpg'],
     averageRating: 4.7,
     reviewCount: 14,
+    stock: 12,
+    status: 'Active',
   },
   {
     id: 7,
@@ -172,6 +204,8 @@ export const products: Product[] = [
     images: ['/Products/car-cover.jpg'],
     averageRating: 4.3,
     reviewCount: 31,
+    stock: 40,
+    status: 'Active',
   },
   {
     id: 8,
@@ -188,6 +222,8 @@ export const products: Product[] = [
     images: ['/Products/seat-cover-detail.jpeg', '/Products/seat-cover-front.jpeg'],
     averageRating: 4.9,
     reviewCount: 8,
+    stock: 15,
+    status: 'Active',
   },
   {
     id: 9,
@@ -204,6 +240,8 @@ export const products: Product[] = [
     images: ['/Products/seat-cover-back.jpg'],
     averageRating: 4.8,
     reviewCount: 12,
+    stock: 18,
+    status: 'Active',
   },
 ];
 

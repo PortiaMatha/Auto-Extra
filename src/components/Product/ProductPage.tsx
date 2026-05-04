@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import "./ProductPage.css";
 import { useParams, Link } from "react-router-dom";
 import { getProductBySlug } from "../../data/products";
+import { useCart } from "../../context/CartContext";
+import { useWishlist } from "../../context/WishlistContext";
 
 type ProductPageParams = {
   slug?: string;
@@ -13,11 +15,14 @@ export function ProductPage() {
   const product = slug ? getProductBySlug(slug) : undefined;
 
   // ---- Hooks: must always be at the top, no early return before these ----
+  const { addItem } = useCart();
+  const { addItem: addToWishlist, hasItem: isWishlisted } = useWishlist();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [selectedMaterial, setSelectedMaterial] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [customBuild, setCustomBuild] = useState(false);
+  const [reviewSubmitted, setReviewSubmitted] = useState(false);
 
   // Whenever the product changes (or first loads), reset state based on it
   useEffect(() => {
@@ -54,14 +59,9 @@ export function ProductPage() {
   };
 
   const handleAddToCart = () => {
-    console.log("Add to cart:", {
-      productId: product.id,
-      material: selectedMaterial,
-      size: selectedSize,
-      quantity,
-      customBuild,
-    });
-    alert("Added to cart (check console for details)");
+    for (let i = 0; i < quantity; i++) {
+      addItem(product);
+    }
   };
 
   const formatZAR = (value: number) =>
@@ -213,8 +213,12 @@ export function ProductPage() {
             >
               Add to cart
             </button>
-            <button type="button" className="btn btn--ghost">
-              Add to wishlist
+            <button
+              type="button"
+              className={`btn btn--ghost${isWishlisted(product.id) ? " btn--wishlisted" : ""}`}
+              onClick={() => addToWishlist(product)}
+            >
+              {isWishlisted(product.id) ? "♥ Saved to Wishlist" : "♡ Add to Wishlist"}
             </button>
           </div>
 
@@ -236,37 +240,34 @@ export function ProductPage() {
           </span>
         </div>
 
-        <form
-          className="product-review-form"
-          onSubmit={(e) => {
-            e.preventDefault();
-            alert("Review submitted (demo only)");
-          }}
-        >
-          <div className="product-review-form__row">
-            <label>
-              Rating:
-              <select defaultValue="5">
-                <option value="5">★★★★★ (5)</option>
-                <option value="4">★★★★☆ (4)</option>
-                <option value="3">★★★☆☆ (3)</option>
-                <option value="2">★★☆☆☆ (2)</option>
-                <option value="1">★☆☆☆☆ (1)</option>
-              </select>
-            </label>
-          </div>
-
-          <div className="product-review-form__row">
-            <label>
-              Your review:
-              <textarea rows={3} placeholder="Share your experience..." />
-            </label>
-          </div>
-
-          <button type="submit" className="btn btn--small">
-            Submit review
-          </button>
-        </form>
+        {reviewSubmitted ? (
+          <p className="product-review-success">✓ Thank you! Your review has been submitted.</p>
+        ) : (
+          <form
+            className="product-review-form"
+            onSubmit={(e) => { e.preventDefault(); setReviewSubmitted(true); }}
+          >
+            <div className="product-review-form__row">
+              <label>
+                Rating:
+                <select defaultValue="5">
+                  <option value="5">★★★★★ (5)</option>
+                  <option value="4">★★★★☆ (4)</option>
+                  <option value="3">★★★☆☆ (3)</option>
+                  <option value="2">★★☆☆☆ (2)</option>
+                  <option value="1">★☆☆☆☆ (1)</option>
+                </select>
+              </label>
+            </div>
+            <div className="product-review-form__row">
+              <label>
+                Your review:
+                <textarea rows={3} placeholder="Share your experience..." />
+              </label>
+            </div>
+            <button type="submit" className="btn btn--small">Submit review</button>
+          </form>
+        )}
       </section>
 
       {/* Custom built section */}

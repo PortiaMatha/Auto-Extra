@@ -1,10 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './ExteriorPage.css';
-import { products } from '../../data/products';
 import { ProductCard } from '../shared/ProductCard';
-
-const exteriorProducts = products.filter(p => p.category === 'exterior');
+import { useProducts } from '../../context/ProductsContext';
 
 const FEATURES = [
   { icon: '🌧️', title: 'All-Weather Protection', desc: 'UV-resistant and waterproof materials that stand up to rain, dust and harsh sunlight.' },
@@ -13,6 +11,8 @@ const FEATURES = [
 ];
 
 export function ExteriorPage() {
+  const { products: allProducts } = useProducts();
+  const exteriorProducts = allProducts.filter(p => p.category === 'exterior' && p.status === 'Active');
   return (
     <div className="exterior-page">
       {/* Breadcrumb */}

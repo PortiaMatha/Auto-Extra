@@ -46,14 +46,14 @@ function CarCoverInner({
           position={[0, 0, 0]}
         />
 
-        {/* 🔹 Small red patch just above the roof / hood */}
+        {/* 🔹 Cover patch on top of car */}
         <mesh
-          position={[0, 0.80, 0]}  // lower = closer to car; raise if it intersects
+          position={[0, 0.80, 0]}
           castShadow
           receiveShadow
         >
-          {/* width, height, length – very small square */}
-          <boxGeometry args={[0.5, 0.02, 0.8]} />
+          {/* width, height, length – enlarged to cover more of the car */}
+          <boxGeometry args={[1.8, 0.06, 3.2]} />
           <meshStandardMaterial
             color="#c00000"
             transparent
@@ -87,7 +87,7 @@ function CarCoverInner({
 
 export function CarCoverScene(props: CarCoverSceneProps) {
   return (
-    <Canvas camera={{ position: [0, 2, 8], fov: 35 }}>
+    <Canvas camera={{ position: [0, 1.8, 5.5], fov: 50 }}>
       <CarCoverInner {...props} />
     </Canvas>
   );

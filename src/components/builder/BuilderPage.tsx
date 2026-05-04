@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './BuilderPage.css';
-import { CarBuilderForm } from '../car/CarBuilderForm';
+import { CarBuilderForm, CarBuilderValue } from '../car/CarBuilderForm';
 
 const STEPS = [
   { n: 1, label: 'Select Car' },
@@ -11,8 +11,15 @@ const STEPS = [
 ];
 
 export function BuilderPage() {
-  const [activeStep] = useState(1);
-  const [builderValue, setBuilderValue] = useState<Record<string, unknown>>({});
+  const [builderValue, setBuilderValue] = useState<CarBuilderValue | null>(null);
+
+  const activeStep = useMemo(() => {
+    if (!builderValue) return 1;
+    if (!builderValue.selection?.brand) return 1;
+    if (!builderValue.area) return 2;
+    if (!builderValue.logoUrl) return 3;
+    return 4;
+  }, [builderValue]);
 
   return (
     <div className="builder-page">
@@ -49,23 +56,37 @@ export function BuilderPage() {
       {/* Builder form */}
       <section className="builder-body">
         <div className="builder-form-wrap">
-          <CarBuilderForm onChange={(value) => setBuilderValue(value as Record<string, unknown>)} />
+          <CarBuilderForm onChange={(value) => setBuilderValue(value)} />
         </div>
 
         {/* Sidebar */}
         <aside className="builder-aside">
           <div className="builder-aside__card">
             <h3 className="builder-aside__title">Your Selection</h3>
-            {Object.keys(builderValue).length === 0 ? (
+            {!builderValue ? (
               <p className="builder-aside__empty">Complete the form to see your summary.</p>
             ) : (
               <ul className="builder-aside__list">
-                {Object.entries(builderValue).map(([k, v]) => (
-                  <li key={k} className="builder-aside__item">
-                    <span className="builder-aside__key">{k}</span>
-                    <span className="builder-aside__val">{String(v)}</span>
-                  </li>
-                ))}
+                <li className="builder-aside__item">
+                  <span className="builder-aside__key">Vehicle</span>
+                  <span className="builder-aside__val">
+                    {builderValue.selection.brand} {builderValue.selection.model} {builderValue.selection.version}
+                  </span>
+                </li>
+                <li className="builder-aside__item">
+                  <span className="builder-aside__key">Cover type</span>
+                  <span className="builder-aside__val">{builderValue.area.replace(/-/g, ' ')}</span>
+                </li>
+                <li className="builder-aside__item">
+                  <span className="builder-aside__key">Logo</span>
+                  <span className="builder-aside__val">{builderValue.logoUrl ? "Uploaded ✓" : "Not uploaded"}</span>
+                </li>
+                <li className="builder-aside__item">
+                  <span className="builder-aside__key">Estimated price</span>
+                  <span className="builder-aside__val">
+                    {new Intl.NumberFormat("en-ZA", { style: "currency", currency: "ZAR", maximumFractionDigits: 0 }).format(builderValue.price)}
+                  </span>
+                </li>
               </ul>
             )}
           </div>

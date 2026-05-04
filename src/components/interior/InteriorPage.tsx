@@ -1,10 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './InteriorPage.css';
-import { products } from '../../data/products';
 import { ProductCard } from '../shared/ProductCard';
-
-const interiorProducts = products.filter(p => p.category === 'interior');
+import { useProducts } from '../../context/ProductsContext';
 
 const FEATURES = [
   { icon: '🪡', title: 'Custom Embroidery', desc: 'Add your logo, initials or design — stitched directly into the fabric.' },
@@ -13,6 +11,8 @@ const FEATURES = [
 ];
 
 export function InteriorPage() {
+  const { products: allProducts } = useProducts();
+  const interiorProducts = allProducts.filter(p => p.category === 'interior' && p.status === 'Active');
   return (
     <div className="interior-page">
       {/* Breadcrumb */}

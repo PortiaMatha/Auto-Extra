@@ -1,0 +1,108 @@
+.wl-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 5rem 1.5rem;
+  text-align: center;
+}
+.wl-empty__icon { color: #fbbf24; }
+.wl-empty__title { font-size: 1.5rem; font-weight: 700; color: #1e293b; margin: 0; }
+.wl-empty__sub { color: #64748b; margin: 0; }
+.wl-empty__cta {
+  margin-top: 0.5rem;
+  padding: 0.75rem 2rem;
+  background: #ffcc00;
+  color: #111;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.wl-empty__cta:hover { background: #e6b800; }
+
+/* Page */
+.wl-page { max-width: 1100px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+.wl-page__title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 2rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+.wl-page__count { font-size: 0.95rem; font-weight: 500; color: #64748b; }
+
+/* Grid */
+.wl-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Card */
+.wl-card {
+  position: relative;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  transition: box-shadow 0.2s;
+}
+.wl-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+
+.wl-card__remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #94a3b8;
+  transition: color 0.15s, border-color 0.15s;
+}
+.wl-card__remove:hover { color: #0d1526; border-color: #ffcc00; }
+
+.wl-card__img-wrap { display: block; }
+.wl-card__img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+
+.wl-card__body { padding: 1rem; }
+.wl-card__brand { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: #94a3b8; }
+.wl-card__title { margin: 0.25rem 0 0.5rem; font-size: 0.9rem; font-weight: 600; }
+.wl-card__title a { color: #1e293b; text-decoration: none; }
+.wl-card__title a:hover { color: #f59e0b; }
+
+.wl-card__prices { display: flex; gap: 0.5rem; align-items: baseline; margin-bottom: 0.75rem; }
+.wl-card__price { font-size: 1rem; font-weight: 700; color: #1e293b; }
+.wl-card__price-old { font-size: 0.8rem; color: #94a3b8; text-decoration: line-through; }
+
+.wl-card__cart-btn {
+  width: 100%;
+  padding: 0.6rem;
+  background: #ffcc00;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #111;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.wl-card__cart-btn:hover { background: #e6b800; }
+
+/* Footer */
+.wl-footer { margin-top: 2rem; }
+.wl-footer__continue { color: #64748b; text-decoration: none; font-size: 0.9rem; }
+.wl-footer__continue:hover { color: #1e293b; }
+
+@media (max-width: 480px) {
+  .wl-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+}

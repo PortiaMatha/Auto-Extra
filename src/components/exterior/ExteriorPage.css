@@ -139,3 +139,22 @@
   .ext-why__item { grid-template-columns: 1fr; }
   .exterior-cta { flex-direction: column; align-items: flex-start; }
 }
+
+@media (max-width: 768px) {
+  .exterior-hero {
+    padding: 1.5rem 1rem;
+    gap: 1rem;
+  }
+
+  .exterior-hero__image img { height: 200px; }
+
+  .exterior-hero__title { font-size: 1.6rem; }
+
+  .exterior-cta { padding: 1.2rem 1rem; }
+
+  .exterior-cta__title { font-size: 1.2rem; }
+}
+
+@media (max-width: 480px) {
+  .exterior-hero__title { font-size: 1.3rem; }
+}

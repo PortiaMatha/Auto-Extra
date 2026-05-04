@@ -1,0 +1,35 @@
+@import './PortalShared.css';
+
+.review-row {
+  display: flex;
+  gap: 14px;
+  padding: 16px 18px;
+  border-bottom: 1px solid #f3f4f6;
+  align-items: flex-start;
+}
+.review-row:last-child { border-bottom: none; }
+.review-row:hover { background: #fafafa; }
+
+.review-row__left { flex-shrink: 0; padding-top: 2px; }
+
+.review-row__body { flex: 1; min-width: 0; }
+
+.review-row__top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.review-row__customer { font-weight: 600; font-size: 14px; color: #111827; }
+
+.review-row__stars { color: #f59e0b; font-size: 15px; letter-spacing: 1px; }
+
+.review-row__date { font-size: 12px; color: #9ca3af; margin-left: auto; }
+
+.review-row__product { font-size: 12px; color: #6b7280; margin-bottom: 6px; }
+
+.review-row__comment { font-size: 13.5px; color: #374151; margin: 0; line-height: 1.5; }
+
+.review-row__actions { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }

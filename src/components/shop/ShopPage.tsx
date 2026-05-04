@@ -1,8 +1,9 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import './ShopPage.css';
-import { products, ProductCategory, MATERIAL_OPTIONS, COLOR_OPTIONS } from '../../data/products';
+import { ProductCategory, MATERIAL_OPTIONS, COLOR_OPTIONS, BRAND_LOGOS } from '../../data/products';
 import { ProductCard } from '../shared/ProductCard';
+import { useProducts } from '../../context/ProductsContext';
 
 type Filter = 'all' | ProductCategory;
 type Sort   = 'default' | 'price-asc' | 'price-desc' | 'rating';
@@ -21,14 +22,16 @@ const SORTS: { value: Sort; label: string }[] = [
   { value: 'rating',     label: 'Top Rated' },
 ];
 
-const allBrands = Array.from(new Set(products.map(p => p.brand)));
-const globalMin = Math.min(...products.map(p => p.basePrice));
-const globalMax = Math.max(...products.map(p => p.basePrice));
-
 const formatZAR = (v: number) =>
   new Intl.NumberFormat('en-ZA', { style: 'currency', currency: 'ZAR', maximumFractionDigits: 0 }).format(v);
 
 export function ShopPage() {
+  const { products: allProducts, loading } = useProducts();
+  const products = useMemo(() => allProducts.filter(p => p.status === 'Active'), [allProducts]);
+
+  const globalMin = products.length ? Math.min(...products.map(p => p.basePrice)) : 0;
+  const globalMax = products.length ? Math.max(...products.map(p => p.basePrice)) : 9999;
+
   const [filter,          setFilter]          = useState<Filter>('all');
   const [sort,            setSort]            = useState<Sort>('default');
   const [search,          setSearch]          = useState('');
@@ -56,7 +59,7 @@ export function ShopPage() {
       const matchColor    = selectedColors.length === 0 || selectedColors.some(c => p.colors.includes(c));
       return matchCat && matchSearch && matchBrand && matchPrice && matchMaterial && matchColor;
     });
-  }, [filter, search, selectedBrand, min, max, selectedMaterial, selectedColors]);
+  }, [products, filter, search, selectedBrand, min, max, selectedMaterial, selectedColors]);
 
   if (sort === 'price-asc')  visible = [...visible].sort((a, b) => a.basePrice - b.basePrice);
   if (sort === 'price-desc') visible = [...visible].sort((a, b) => b.basePrice - a.basePrice);
@@ -132,24 +135,30 @@ export function ShopPage() {
             </ul>
           </div>
 
-          {/* Brand */}
+          {/* Brands */}
           <div className="shop-sidebar__section">
-            <h4 className="shop-sidebar__subtitle">Popular brands</h4>
-            <ul className="shop-sidebar__list">
-              {allBrands.map(brand => (
-                <li key={brand}>
-                  <button
-                    className={`shop-sidebar__btn${selectedBrand === brand ? ' shop-sidebar__btn--active' : ''}`}
-                    onClick={() => setSelectedBrand(prev => prev === brand ? null : brand)}
-                  >
-                    <span>{brand}</span>
-                    <span className="shop-sidebar__count">
-                      {products.filter(p => p.brand === brand).length}
-                    </span>
-                  </button>
-                </li>
+            <h4 className="shop-sidebar__subtitle">Brands</h4>
+            <div className="brand-logo-grid">
+              {BRAND_LOGOS.map(({ name, logo }) => (
+                <button
+                  key={name}
+                  className={`brand-logo-btn${selectedBrand === name ? ' brand-logo-btn--active' : ''}`}
+                  onClick={() => setSelectedBrand(prev => prev === name ? null : name)}
+                  title={name}
+                >
+                  <img src={logo} alt={name} className="brand-logo-btn__img" />
+                  <span className="brand-logo-btn__name">{name}</span>
+                </button>
               ))}
-            </ul>
+            </div>
+            {selectedBrand && (
+              <button
+                className="shop-sidebar__clear"
+                onClick={() => setSelectedBrand(null)}
+              >
+                ✕ Clear brand filter
+              </button>
+            )}
           </div>
 
           {/* Material */}
@@ -267,7 +276,9 @@ export function ShopPage() {
           </div>
 
           {/* Grid */}
-          {visible.length > 0 ? (
+          {loading ? (
+            <div className="shop-empty"><p>Loading products…</p></div>
+          ) : visible.length > 0 ? (
             <div className="shop-grid">
               {visible.map(p => <ProductCard key={p.id} product={p} />)}
             </div>

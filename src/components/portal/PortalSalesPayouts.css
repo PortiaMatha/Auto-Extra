@@ -87,8 +87,8 @@
 .paytable__customer { font-weight: 500; color: #111827; }
 .paytable__date     { font-size: 12.5px; color: #6b7280; white-space: nowrap; }
 .paytable__amount   { font-weight: 600; color: #111827; }
-.paytable__fee      { color: #ef4444; font-size: 12.5px; }
-.paytable__net      { font-weight: 700; color: #059669; }
+.paytable__fee      { color: #0d1526; font-size: 12.5px; }
+.paytable__net      { font-weight: 700; color: #b8860b; }
 
 /* Payout status */
 .pstatus {
@@ -100,7 +100,7 @@
   white-space: nowrap;
 }
 
-.pstatus--paid       { background: #d1fae5; color: #065f46; }
+.pstatus--paid       { background: #fff9e0; color: #664c00; }
 .pstatus--pending    { background: #fef3c7; color: #92400e; }
 .pstatus--processing { background: #dbeafe; color: #1d4ed8; }
 
@@ -166,7 +166,7 @@
   letter-spacing: -0.5px;
 }
 
-.pay-stat__value--green  { color: #059669; }
+.pay-stat__value--green  { color: #b8860b; }
 .pay-stat__value--orange { color: #d97706; }
 
 .pay-divider {

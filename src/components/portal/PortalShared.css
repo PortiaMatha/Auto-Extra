@@ -19,7 +19,7 @@
 }
 .btn-primary:hover  { background: #3d56d4; }
 .btn-primary:active { transform: scale(0.98); }
-.btn-primary--saved { background: #22c55e; }
+.btn-primary--saved { background: #ffcc00; color: #111; }
 
 .btn-outline {
   display: inline-flex;
@@ -136,7 +136,7 @@
   padding: 4px 10px;
   border-radius: 20px;
 }
-.status-badge--active   { background: #d1fae5; color: #065f46; }
+.status-badge--active   { background: #fff9e0; color: #664c00; }
 .status-badge--inactive { background: #f3f4f6; color: #6b7280; }
 
 /* Stock pill */
@@ -149,7 +149,7 @@
   background: #eff6ff;
   color: #1d4ed8;
 }
-.stock-pill--low { background: #fef2f2; color: #dc2626; }
+.stock-pill--low { background: #fff9e0; color: #0d1526; }
 
 /* Action buttons */
 .action-btn {
@@ -163,7 +163,7 @@
   font-family: inherit;
 }
 .action-btn:hover        { background: #f3f4f6; }
-.action-btn--danger:hover { background: #fef2f2; border-color: #fca5a5; }
+.action-btn--danger:hover { background: #fff9e0; border-color: #ffcc00; }
 
 /* Pagination */
 .ppage__pagination,

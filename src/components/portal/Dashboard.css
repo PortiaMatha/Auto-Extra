@@ -71,7 +71,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #22c55e;
+  background: #ffcc00;
   flex-shrink: 0;
 }
 
@@ -154,8 +154,8 @@
   font-weight: 500;
 }
 
-.stat-card__change--positive { color: #16a34a; }
-.stat-card__change--negative { color: #dc2626; }
+.stat-card__change--positive { color: #b8860b; }
+.stat-card__change--negative { color: #0d1526; }
 .stat-card__change--neutral  { color: #6b7280; }
 
 .stat-card__action {
@@ -287,9 +287,9 @@
 }
 
 .badge--blue   { background: #dbeafe; color: #1d4ed8; }
-.badge--green  { background: #d1fae5; color: #065f46; }
+.badge--green  { background: #fff9e0; color: #664c00; }
 .badge--orange { background: #fef3c7; color: #92400e; }
-.badge--red    { background: #fee2e2; color: #991b1b; }
+.badge--red    { background: #fff9e0; color: #664c00; }
 
 /* --- Quick Actions --- */
 .quick-actions-grid {

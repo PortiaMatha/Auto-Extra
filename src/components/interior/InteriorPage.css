@@ -227,3 +227,23 @@
   .features-row { grid-template-columns: 1fr; }
   .interior-cta { flex-direction: column; align-items: flex-start; }
 }
+
+@media (max-width: 768px) {
+  .interior-hero {
+    padding: 1.5rem 1rem;
+    gap: 1rem;
+  }
+
+  .interior-hero__image img { height: 200px; }
+
+  .features-row { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+
+  .interior-cta { padding: 1.2rem 1rem; }
+
+  .interior-cta__title { font-size: 1.2rem; }
+}
+
+@media (max-width: 480px) {
+  .features-row { grid-template-columns: 1fr; }
+  .interior-hero__title { font-size: 1.6rem; }
+}

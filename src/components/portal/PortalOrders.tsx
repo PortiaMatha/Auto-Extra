@@ -1,55 +1,171 @@
 import React, { useState } from 'react';
 import './PortalOrders.css';
+import { useOrders } from '../../context/OrdersContext';
+import { Order, OrderStatus } from '../../types/orders';
 
-type OrderStatus = 'Processing' | 'Delivered' | 'Pending' | 'Cancelled';
-
-type Order = {
-  id: string;
-  customer: string;
-  email: string;
-  date: string;
-  items: number;
-  total: number;
-  status: OrderStatus;
-};
-
-const mockOrders: Order[] = [
-  { id: 'AE9844', customer: 'John Smith',    email: 'john@mail.com',    date: '15 Mar 2024', items: 2, total: 1250, status: 'Processing' },
-  { id: 'AE9843', customer: 'Sarah Miller',  email: 'sarah@mail.com',   date: '14 Mar 2024', items: 1, total: 890,  status: 'Delivered'  },
-  { id: 'AE9842', customer: 'Mike Roberts',  email: 'mike@mail.com',    date: '14 Mar 2024', items: 3, total: 2100, status: 'Pending'    },
-  { id: 'AE9841', customer: 'Lisa Khumalo',  email: 'lisa@mail.com',    date: '12 Mar 2024', items: 1, total: 650,  status: 'Cancelled'  },
-  { id: 'AE9840', customer: 'David Botha',   email: 'david@mail.com',   date: '11 Mar 2024', items: 4, total: 3450, status: 'Delivered'  },
-  { id: 'AE9839', customer: 'Emma Nkosi',    email: 'emma@mail.com',    date: '10 Mar 2024', items: 2, total: 1740, status: 'Processing' },
-  { id: 'AE9838', customer: 'Thabo Dlamini', email: 'thabo@mail.com',   date: '09 Mar 2024', items: 1, total: 480,  status: 'Delivered'  },
-  { id: 'AE9837', customer: 'Priya Naidoo',  email: 'priya@mail.com',   date: '08 Mar 2024', items: 2, total: 960,  status: 'Pending'    },
+const STATUS_TABS: Array<'All' | OrderStatus> = [
+  'All', 'Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled',
 ];
 
-const STATUS_TABS: Array<'All' | OrderStatus> = ['All', 'Processing', 'Delivered', 'Pending', 'Cancelled'];
+const formatDate = (iso: string) =>
+  new Date(iso).toLocaleDateString('en-ZA', { day: '2-digit', month: 'short', year: 'numeric' });
 
-const STATUS_COUNTS: Record<string, number> = {
-  All: mockOrders.length,
-  Processing: mockOrders.filter(o => o.status === 'Processing').length,
-  Delivered:  mockOrders.filter(o => o.status === 'Delivered').length,
-  Pending:    mockOrders.filter(o => o.status === 'Pending').length,
-  Cancelled:  mockOrders.filter(o => o.status === 'Cancelled').length,
-};
+/* ── Order detail drawer ──────────────────────────────────────────── */
+
+function OrderDrawer({
+  order,
+  onClose,
+  onStatusChange,
+}: {
+  order: Order;
+  onClose: () => void;
+  onStatusChange: (status: OrderStatus) => Promise<void>;
+}) {
+  const [updating, setUpdating] = useState(false);
+
+  const handleStatus = async (status: OrderStatus) => {
+    setUpdating(true);
+    try { await onStatusChange(status); } finally { setUpdating(false); }
+  };
+
+  return (
+    <div className="odrawer-overlay" onClick={onClose}>
+      <div className="odrawer" onClick={e => e.stopPropagation()}>
+        <div className="odrawer__header">
+          <div>
+            <h2 className="odrawer__title">Order #{order.orderRef}</h2>
+            <p className="odrawer__date">{formatDate(order.createdAt)}</p>
+          </div>
+          <button className="odrawer__close" onClick={onClose}>✕</button>
+        </div>
+
+        {/* Customer */}
+        <div className="odrawer__section">
+          <h3 className="odrawer__section-title">Customer</h3>
+          <div className="odrawer__customer-card">
+            <div className="odrawer__avatar">{order.customerName.charAt(0)}</div>
+            <div>
+              <p className="odrawer__customer-name">{order.customerName}</p>
+              <p className="odrawer__customer-email">{order.customerEmail}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Products ordered */}
+        <div className="odrawer__section">
+          <h3 className="odrawer__section-title">Products Ordered</h3>
+          {order.items.length === 0 ? (
+            <p className="odrawer__empty">No items found.</p>
+          ) : (
+            <table className="odrawer__items-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Size</th>
+                  <th>Color</th>
+                  <th>Qty</th>
+                  <th>Unit Price</th>
+                  <th>Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                {order.items.map(item => (
+                  <tr key={item.id}>
+                    <td>{item.productTitle}</td>
+                    <td>{item.size || '—'}</td>
+                    <td>{item.color || '—'}</td>
+                    <td>{item.quantity}</td>
+                    <td>R{item.unitPrice.toLocaleString()}</td>
+                    <td>R{(item.unitPrice * item.quantity).toLocaleString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+
+        {/* Totals */}
+        <div className="odrawer__section">
+          <div className="odrawer__totals">
+            <div className="odrawer__total-row">
+              <span>Subtotal</span>
+              <span>R{(order.totalAmount - order.shippingFee).toLocaleString()}</span>
+            </div>
+            <div className="odrawer__total-row">
+              <span>Shipping</span>
+              <span>R{order.shippingFee.toLocaleString()}</span>
+            </div>
+            <div className="odrawer__total-row odrawer__total-row--grand">
+              <span>Total</span>
+              <span>R{order.totalAmount.toLocaleString()}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Status update */}
+        <div className="odrawer__section">
+          <h3 className="odrawer__section-title">Update Status</h3>
+          <div className="odrawer__status-btns">
+            {(['Pending','Processing','Shipped','Delivered','Cancelled'] as OrderStatus[]).map(s => (
+              <button
+                key={s}
+                disabled={updating || order.status === s}
+                className={`odrawer__status-btn odrawer__status-btn--${s.toLowerCase()}${order.status === s ? ' odrawer__status-btn--current' : ''}`}
+                onClick={() => handleStatus(s)}
+              >{s}</button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Main component ───────────────────────────────────────────────── */
 
 export function PortalOrders() {
-  const [tab, setTab]       = useState<'All' | OrderStatus>('All');
+  const { orders, loading, updateOrderStatus, deleteOrder } = useOrders();
+  const [tab, setTab] = useState<'All' | OrderStatus>('All');
   const [search, setSearch] = useState('');
-  const [selected, setSelected] = useState<string[]>([]);
+  const [selected, setSelected] = useState<number[]>([]);
+  const [activeOrder, setActiveOrder] = useState<Order | null>(null);
 
-  const visible = mockOrders.filter(o => {
+  const visible = orders.filter(o => {
     const matchTab = tab === 'All' || o.status === tab;
-    const matchSearch = o.customer.toLowerCase().includes(search.toLowerCase()) ||
-                        o.id.toLowerCase().includes(search.toLowerCase());
+    const matchSearch =
+      o.customerName.toLowerCase().includes(search.toLowerCase()) ||
+      o.orderRef.toLowerCase().includes(search.toLowerCase()) ||
+      o.customerEmail.toLowerCase().includes(search.toLowerCase());
     return matchTab && matchSearch;
   });
 
-  const toggleSelect = (id: string) =>
+  const countFor = (t: 'All' | OrderStatus) =>
+    t === 'All' ? orders.length : orders.filter(o => o.status === t).length;
+
+  const toggleSelect = (id: number) =>
     setSelected(s => s.includes(id) ? s.filter(x => x !== id) : [...s, id]);
   const toggleAll = () =>
     setSelected(selected.length === visible.length ? [] : visible.map(o => o.id));
+
+  const handleDelete = async (id: number) => {
+    if (window.confirm('Delete this order? This cannot be undone.')) {
+      await deleteOrder(id);
+      setSelected(s => s.filter(x => x !== id));
+    }
+  };
+
+  const exportCSV = () => {
+    const header = 'Order#,Customer,Email,Date,Items,Total,Status';
+    const rows = orders.map(o =>
+      `${o.orderRef},"${o.customerName}","${o.customerEmail}",${formatDate(o.createdAt)},${o.items.length},${o.totalAmount},${o.status}`
+    );
+    const csv = [header, ...rows].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'orders.csv'; a.click();
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="opage">
@@ -57,11 +173,10 @@ export function PortalOrders() {
       <div className="opage__header">
         <div>
           <h1 className="opage__title">Orders</h1>
-          <p className="opage__sub">{mockOrders.length} total orders</p>
+          <p className="opage__sub">{orders.length} total order{orders.length !== 1 ? 's' : ''}</p>
         </div>
         <div className="opage__header-actions">
-          <button className="btn-outline">⬇ Export</button>
-          <button className="btn-primary">+ New Order</button>
+          <button className="btn-outline" onClick={exportCSV}>⬇ Export</button>
         </div>
       </div>
 
@@ -74,7 +189,7 @@ export function PortalOrders() {
             onClick={() => setTab(t)}
           >
             {t}
-            <span className="otab__count">{STATUS_COUNTS[t]}</span>
+            <span className="otab__count">{countFor(t)}</span>
           </button>
         ))}
       </div>
@@ -90,18 +205,21 @@ export function PortalOrders() {
             className="opage__search-input"
           />
         </div>
-        <div className="opage__toolbar-right">
-          <button className="btn-outline">📅 Date Range</button>
-          <button className="btn-outline">⚙ Filters</button>
-        </div>
       </div>
 
       {/* Table */}
       <div className="opage__card">
+        {loading && <div className="opage__loading">Loading orders…</div>}
         <table className="otable">
           <thead>
             <tr>
-              <th><input type="checkbox" onChange={toggleAll} checked={selected.length === visible.length && visible.length > 0} /></th>
+              <th>
+                <input
+                  type="checkbox"
+                  onChange={toggleAll}
+                  checked={selected.length === visible.length && visible.length > 0}
+                />
+              </th>
               <th>Order #</th>
               <th>Customer</th>
               <th>Date</th>
@@ -114,43 +232,71 @@ export function PortalOrders() {
           <tbody>
             {visible.map(o => (
               <tr key={o.id} className={selected.includes(o.id) ? 'otable__row--selected' : ''}>
-                <td><input type="checkbox" checked={selected.includes(o.id)} onChange={() => toggleSelect(o.id)} /></td>
-                <td><span className="otable__id">{o.id}</span></td>
+                <td>
+                  <input
+                    type="checkbox"
+                    checked={selected.includes(o.id)}
+                    onChange={() => toggleSelect(o.id)}
+                  />
+                </td>
+                <td><span className="otable__id">{o.orderRef}</span></td>
                 <td>
                   <div className="otable__customer">
-                    <div className="otable__avatar">{o.customer.charAt(0)}</div>
+                    <div className="otable__avatar">{o.customerName.charAt(0)}</div>
                     <div>
-                      <div className="otable__customer-name">{o.customer}</div>
-                      <div className="otable__customer-email">{o.email}</div>
+                      <div className="otable__customer-name">{o.customerName}</div>
+                      <div className="otable__customer-email">{o.customerEmail}</div>
                     </div>
                   </div>
                 </td>
-                <td className="otable__date">{o.date}</td>
-                <td className="otable__items">{o.items} item{o.items !== 1 ? 's' : ''}</td>
-                <td className="otable__total">R{o.total.toLocaleString()}.00</td>
-                <td><span className={`ostatus ostatus--${o.status.toLowerCase()}`}>{o.status}</span></td>
+                <td className="otable__date">{formatDate(o.createdAt)}</td>
+                <td className="otable__items">{o.items.length} item{o.items.length !== 1 ? 's' : ''}</td>
+                <td className="otable__total">R{o.totalAmount.toLocaleString()}.00</td>
                 <td>
-                  <button className="view-btn">View →</button>
+                  <span className={`ostatus ostatus--${o.status.toLowerCase()}`}>{o.status}</span>
+                </td>
+                <td>
+                  <div className="ptable__actions">
+                    <button className="view-btn" onClick={() => setActiveOrder(o)}>View →</button>
+                    <button
+                      className="action-btn action-btn--danger"
+                      title="Delete"
+                      onClick={() => handleDelete(o.id)}
+                    >🗑</button>
+                  </div>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-        {visible.length === 0 && (
+        {!loading && visible.length === 0 && (
           <div className="opage__empty">No orders found.</div>
         )}
       </div>
 
       {/* Pagination */}
       <div className="opage__pagination">
-        <span className="opage__pag-info">Showing {visible.length} of {mockOrders.length} orders</span>
+        <span className="opage__pag-info">
+          Showing {visible.length} of {orders.length} orders
+        </span>
         <div className="opage__pag-btns">
           <button className="pag-btn" disabled>← Prev</button>
           <button className="pag-btn pag-btn--active">1</button>
-          <button className="pag-btn">2</button>
           <button className="pag-btn">Next →</button>
         </div>
       </div>
+
+      {/* Order detail drawer */}
+      {activeOrder && (
+        <OrderDrawer
+          order={activeOrder}
+          onClose={() => setActiveOrder(null)}
+          onStatusChange={async (status) => {
+            await updateOrderStatus(activeOrder.id, status);
+            setActiveOrder(prev => prev ? { ...prev, status } : null);
+          }}
+        />
+      )}
     </div>
   );
 }
