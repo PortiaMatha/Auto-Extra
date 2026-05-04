@@ -18,15 +18,33 @@ create table if not exists customers (
 
 -- ── Orders ────────────────────────────────────────────────────────────
 create table if not exists orders (
-  id           bigserial primary key,
-  order_ref    text        not null unique,
-  customer_id  bigint      references customers(id) on delete set null,
-  status       text        not null default 'Pending'
-                 check (status in ('Pending','Processing','Shipped','Delivered','Cancelled')),
-  total_amount numeric     not null default 0,
-  shipping_fee numeric     not null default 0,
-  notes        text        not null default '',
-  created_at   timestamptz not null default now()
+  id                   bigserial primary key,
+  order_ref            text        not null unique,
+  customer_id          bigint      references customers(id) on delete set null,
+  status               text        not null default 'Pending'
+                         check (status in ('Pending','Processing','Shipped','Delivered','Cancelled')),
+  payment_status       text        not null default 'Unpaid'
+                         check (payment_status in ('Unpaid','Paid','Failed')),
+  total_amount         numeric     not null default 0,
+  shipping_fee         numeric     not null default 0,
+  notes                text        not null default '',
+  phone                text        not null default '',
+  delivery_address     text        not null default '',
+  delivery_city        text        not null default '',
+  delivery_province    text        not null default '',
+  delivery_postal_code text        not null default '',
+  delivery_country     text        not null default 'South Africa',
+  billing_same         boolean     not null default true,
+  billing_first_name   text        not null default '',
+  billing_last_name    text        not null default '',
+  billing_address      text        not null default '',
+  billing_city         text        not null default '',
+  billing_province     text        not null default '',
+  billing_postal_code  text        not null default '',
+  billing_country      text        not null default '',
+  billing_phone        text        not null default '',
+  billing_alt_phone    text        not null default '',
+  created_at           timestamptz not null default now()
 );
 
 -- ── Order items (links orders ↔ products) ─────────────────────────────

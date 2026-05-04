@@ -47,8 +47,44 @@ function OrderDrawer({
             <div>
               <p className="odrawer__customer-name">{order.customerName}</p>
               <p className="odrawer__customer-email">{order.customerEmail}</p>
+              {order.phone && <p className="odrawer__customer-email">📞 {order.phone}</p>}
             </div>
           </div>
+        </div>
+
+        {/* Payment status */}
+        <div className="odrawer__section">
+          <h3 className="odrawer__section-title">Payment</h3>
+          <span className={`opayment opayment--${order.paymentStatus.toLowerCase()}`}>
+            {order.paymentStatus}
+          </span>
+        </div>
+
+        {/* Delivery address */}
+        <div className="odrawer__section">
+          <h3 className="odrawer__section-title">Delivery Address</h3>
+          <div className="odrawer__address">
+            <p>{order.deliveryAddress}</p>
+            <p>{order.deliveryCity}{order.deliveryProvince ? `, ${order.deliveryProvince}` : ''} {order.deliveryPostalCode}</p>
+            <p>{order.deliveryCountry}</p>
+          </div>
+        </div>
+
+        {/* Billing address */}
+        <div className="odrawer__section">
+          <h3 className="odrawer__section-title">Billing Address</h3>
+          {order.billingSame ? (
+            <p className="odrawer__same-billing">Same as delivery address</p>
+          ) : (
+            <div className="odrawer__address">
+              <p><strong>{order.billingFirstName} {order.billingLastName}</strong></p>
+              <p>{order.billingAddress}</p>
+              <p>{order.billingCity}{order.billingProvince ? `, ${order.billingProvince}` : ''} {order.billingPostalCode}</p>
+              <p>{order.billingCountry}</p>
+              {order.billingPhone    && <p>📞 {order.billingPhone}</p>}
+              {order.billingAltPhone && <p>📞 Alt: {order.billingAltPhone}</p>}
+            </div>
+          )}
         </div>
 
         {/* Products ordered */}
